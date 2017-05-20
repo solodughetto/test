@@ -1,0 +1,24 @@
+version: '2'
+services:
+
+    database:
+        image: mysql:5.7
+        ports:
+            - 3306:3306
+        volumes:
+            - ./db:/var/lib/mysql:rw
+        environment:
+            MYSQL_ROOT_PASSWORD: "test"
+            MYSQL_DATABASE: "Thomas"
+            MYSQL_USER: "Thomas"
+            MYSQL_PASSWORD: "Matthieu"
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 8081:80
+        environment:
+            PMA_USER: "root"
+            PMA_PASSWORD: "test"
+        links:
+            - database:db
